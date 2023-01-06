@@ -2,7 +2,7 @@
 name: Server Feature
 about: Server Feature
 title: ''
-labels: ['area/server']
+labels: area/server
 assignees: ''
 
 ---
