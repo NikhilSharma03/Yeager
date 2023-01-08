@@ -14,7 +14,7 @@ var DB *gorm.DB
 
 // DAO interface
 type DAO interface {
-	PracticeRepository() PracticeRepository
+	NewPracticeRepository() PracticeRepository
 }
 
 // The dao struct implement the DAO interface
@@ -26,7 +26,7 @@ func NewDAO(db *gorm.DB) DAO {
 	return &dao{}
 }
 
-func (*dao) PracticeRepository() PracticeRepository {
+func (*dao) NewPracticeRepository() PracticeRepository {
 	return &practiceRepository{}
 }
 

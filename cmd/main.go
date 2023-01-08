@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/NikhilSharma03/Yeager/config"
+	"github.com/NikhilSharma03/Yeager/internal/datastruct"
 	"github.com/NikhilSharma03/Yeager/internal/repository"
 )
 
@@ -23,6 +24,12 @@ func main() {
 	dbClient, err := repository.ConnectDB(&cfg)
 	if err != nil {
 		log.Fatal("failed to connect to DB!", err)
+	}
+
+	// migrate tables
+	err = dbClient.AutoMigrate(datastruct.Practice{})
+	if err != nil {
+		log.Fatal("failed to migrate!", err)
 	}
 
 	// Initialize DAO
