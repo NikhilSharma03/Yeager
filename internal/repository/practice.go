@@ -34,10 +34,10 @@ func (*practiceRepository) Create(practice *datastruct.Practice) error {
 func (*practiceRepository) GetAll(practices *[]datastruct.Practice) error {
 	result := DB.Find(practices)
 	if result.Error != nil {
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return errNoPracticeRecordsFound
-		}
 		return fmt.Errorf("failed to fetch all practice! %s", result.Error.Error())
+	}
+	if result.RowsAffected == 0 {
+		return errNoPracticeRecordsFound
 	}
 	return nil
 }
