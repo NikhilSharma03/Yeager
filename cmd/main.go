@@ -27,7 +27,7 @@ func main() {
 	}
 
 	// migrate tables
-	err = dbClient.AutoMigrate(datastruct.Practice{})
+	err = dbClient.AutoMigrate(datastruct.User{}, datastruct.Practice{})
 	if err != nil {
 		log.Fatal("failed to migrate!", err)
 	}
