@@ -48,6 +48,9 @@ func (*practiceRepository) GetByUserID(practices *[]datastruct.Practice, userID 
 	if result.Error != nil {
 		return fmt.Errorf("failed to fetch all practice by user id! %s", result.Error.Error())
 	}
+	if result.RowsAffected == 0 {
+		return errNoPracticeRecordsFound
+	}
 	return nil
 }
 
