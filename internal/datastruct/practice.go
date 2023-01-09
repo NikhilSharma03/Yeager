@@ -18,16 +18,17 @@ type Practice struct {
 	Expired         bool           `gorm:"default:false" json:"expired"`
 	RequiredMembers int            `gorm:"not null" json:"required_members"`
 	Members         pq.StringArray `gorm:"type:text[];not null" json:"members"`
-	UserID          uuid.UUID      `gorm:"not null" json:"user_id"`
+	Creator         string         `gorm:"not null" json:"creator"`
 }
 
-func NewPractice(title, description, location string, requiredMembers int, date time.Time, members []string) *Practice {
+func NewPractice(title, description, location, creator string, requiredMembers int, date time.Time, members []string) *Practice {
 	return &Practice{
 		Title:           title,
 		Description:     description,
 		Location:        location,
 		Date:            date,
 		Expired:         false,
+		Creator:         creator,
 		RequiredMembers: requiredMembers,
 		Members:         members,
 	}

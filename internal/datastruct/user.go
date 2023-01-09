@@ -7,14 +7,13 @@ import (
 )
 
 type User struct {
-	ID        uuid.UUID  `gorm:"type:uuid;default:gen_random_uuid();primaryKey;" json:"id"`
-	CreatedAt time.Time  `gorm:"autoCreateTime" json:"created_at"`
-	UpdatedAt time.Time  `gorm:"autoUpdateTime" json:"updated_at"`
-	Name      string     `gorm:"not null" json:"name"`
-	Email     string     `gorm:"not null;unique_index" json:"email"`
-	Password  string     `json:"password"`
-	Avatar    string     `gorm:"not null" json:"avatar"`
-	Practices []Practice `gorm:"foreignKey:UserID;references:ID" json:"practices"`
+	ID        uuid.UUID `gorm:"type:uuid;default:gen_random_uuid();primaryKey;" json:"id"`
+	CreatedAt time.Time `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updated_at"`
+	Name      string    `gorm:"not null" json:"name"`
+	Email     string    `gorm:"not null;unique_index" json:"email"`
+	Password  string    `json:"password"`
+	Avatar    string    `gorm:"not null" json:"avatar"`
 }
 
 func NewUser(name, email, password, avatar string) *User {
