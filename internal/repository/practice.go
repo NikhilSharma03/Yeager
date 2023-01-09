@@ -11,6 +11,7 @@ import (
 type PracticeRepository interface {
 	Create(practice *datastruct.Practice) error
 	GetAll(practices *[]datastruct.Practice) error
+	GetByUserID(practices *[]datastruct.Practice, userID string) error
 	GetByID(practice *datastruct.Practice, id string) error
 	UpdateByID(practice *datastruct.Practice, id string) error
 	DeleteByID(practice *datastruct.Practice, id string) error
@@ -38,6 +39,14 @@ func (*practiceRepository) GetAll(practices *[]datastruct.Practice) error {
 	}
 	if result.RowsAffected == 0 {
 		return errNoPracticeRecordsFound
+	}
+	return nil
+}
+
+func (*practiceRepository) GetByUserID(practices *[]datastruct.Practice, userID string) error {
+	result := DB.Find(practices, "creator=?", userID)
+	if result.Error != nil {
+		return fmt.Errorf("failed to fetch all practice by user id! %s", result.Error.Error())
 	}
 	return nil
 }
