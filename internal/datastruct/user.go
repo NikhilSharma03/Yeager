@@ -11,7 +11,7 @@ type User struct {
 	CreatedAt time.Time `gorm:"autoCreateTime" json:"created_at"`
 	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 	Name      string    `gorm:"not null" json:"name"`
-	Email     string    `gorm:"not null;unique_index" json:"email"`
+	Email     string    `gorm:"not null;unique;" json:"email"`
 	Password  string    `json:"password"`
 	Avatar    string    `gorm:"not null" json:"avatar"`
 }
