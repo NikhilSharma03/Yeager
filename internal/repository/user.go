@@ -12,6 +12,7 @@ type UserRepository interface {
 	Create(user *datastruct.User) error
 	GetByID(user *datastruct.User, id string) error
 	UpdateByID(user *datastruct.User, id string) error
+	DeleteByID(user *datastruct.User, id string) error
 }
 
 type userRepository struct{}
@@ -43,6 +44,17 @@ func (*userRepository) UpdateByID(user *datastruct.User, id string) error {
 	result := DB.Model(user).Where("id=?", id).Updates(user)
 	if result.Error != nil {
 		return fmt.Errorf("failed to update user by id! %s", result.Error.Error())
+	}
+	if result.RowsAffected == 0 {
+		return errNoUserFoundByID
+	}
+	return nil
+}
+
+func (*userRepository) DeleteByID(user *datastruct.User, id string) error {
+	result := DB.Where("id=?", id).Delete(user)
+	if result.Error != nil {
+		return fmt.Errorf("failed to delete user by id! %s", result.Error.Error())
 	}
 	if result.RowsAffected == 0 {
 		return errNoUserFoundByID
