@@ -15,6 +15,7 @@ var DB *gorm.DB
 // DAO interface
 type DAO interface {
 	NewPracticeRepository() PracticeRepository
+	NewUserRepository() UserRepository
 }
 
 // The dao struct implement the DAO interface
@@ -28,6 +29,10 @@ func NewDAO(db *gorm.DB) DAO {
 
 func (*dao) NewPracticeRepository() PracticeRepository {
 	return &practiceRepository{}
+}
+
+func (*dao) NewUserRepository() UserRepository {
+	return &userRepository{}
 }
 
 // ConnectDB connects to postgres Database using provided config
