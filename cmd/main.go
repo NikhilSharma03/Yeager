@@ -3,11 +3,14 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/NikhilSharma03/Yeager/config"
+	"github.com/NikhilSharma03/Yeager/internal/app"
 	"github.com/NikhilSharma03/Yeager/internal/datastruct"
 	"github.com/NikhilSharma03/Yeager/internal/repository"
+	"github.com/NikhilSharma03/Yeager/internal/router"
 )
 
 func main() {
@@ -36,4 +39,14 @@ func main() {
 	dao := repository.NewDAO(dbClient)
 	fmt.Println(dao, logger)
 
+	// Initialize services
+
+	// Initialize app
+	app := app.NewApp()
+
+	// Initialize router
+	r := router.Init(app)
+
+	fmt.Println("Starting Server on Port:", cfg.ServerPort)
+	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, r))
 }
