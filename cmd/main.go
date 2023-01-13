@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/NikhilSharma03/Yeager/config"
@@ -44,6 +45,8 @@ func main() {
 	app := app.NewApp()
 
 	// Initialize router
-	router.Init(app)
+	r := router.Init(app)
 
+	fmt.Println("Starting Server on Port:", cfg.ServerPort)
+	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, r))
 }
