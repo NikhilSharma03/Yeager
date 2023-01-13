@@ -6,8 +6,10 @@ import (
 	"os"
 
 	"github.com/NikhilSharma03/Yeager/config"
+	"github.com/NikhilSharma03/Yeager/internal/app"
 	"github.com/NikhilSharma03/Yeager/internal/datastruct"
 	"github.com/NikhilSharma03/Yeager/internal/repository"
+	"github.com/NikhilSharma03/Yeager/internal/router"
 )
 
 func main() {
@@ -35,5 +37,13 @@ func main() {
 	// Initialize DAO
 	dao := repository.NewDAO(dbClient)
 	fmt.Println(dao, logger)
+
+	// Initialize services
+
+	// Initialize app
+	app := app.NewApp()
+
+	// Initialize router
+	router.Init(app)
 
 }
